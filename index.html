@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carpeta completa</title>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--red:#ff2b3a;--red2:#b0101c;--bg:#050203;--tx:#fff;--mut:#cfc4c5}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:"Inter","Segoe UI",system-ui,sans-serif;background:var(--bg);background-image:linear-gradient(160deg,#000 0%,#0a0204 35%,#2a050a 75%,#4a0810 100%);background-attachment:fixed}
+.wrap{max-width:1100px;margin:0 auto;padding:56px 20px 72px}
+header{text-align:center;margin-bottom:44px}
+.tab{display:inline-block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);border:1px solid #5a1219;background:#14050760;padding:6px 14px;border-radius:99px;margin-bottom:18px}
+h1{margin:0;font-size:clamp(40px,8vw,76px);line-height:1;color:var(--red);font-weight:900;letter-spacing:-.02em;text-shadow:0 0 40px #ff2b3a55}
+.sub{margin:16px auto 0;max-width:640px;font-size:clamp(17px,2.6vw,22px);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:linear-gradient(180deg,#160609cc,#0b0305f2);border:1px solid #3a0d12;border-radius:6px 18px 18px 18px;overflow:hidden;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);border-color:var(--red);box-shadow:0 14px 40px #ff2b3a30}
+.card:before{content:"";position:absolute;top:0;left:0;width:84px;height:5px;background:var(--red);z-index:2;border-radius:0 0 6px 0}
+.art{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
+h2{margin:0;font-size:20px;line-height:1.2;color:#fff}
+p{margin:0;font-size:14.5px;line-height:1.5;color:var(--mut)}
+.go{margin-top:auto;padding-top:8px;color:var(--red);font-weight:700;font-size:14px}
+footer{text-align:center;margin-top:48px;color:#8a7a7c;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="tab">📁 Acceso total</div>
+<h1>Carpeta completa</h1>
+<div class="sub">Todas mis estrategias, indicadores, y clases privadas en 1 carpeta</div>
+</header>
+<main class="grid" id="g"></main>
+<footer>El trading implica riesgo de pérdida. Contenido educativo, no es asesoramiento financiero.</footer>
+</div>
+<script>
+const R=(i,k)=>{let x=Math.sin(i*97.1+k*13.7)*10000;return x-Math.floor(x)};
+const M={
+candles:i=>{let s='',y=130;for(let k=0;k<14;k++){const x=24+k*27,d=(R(i,k)-.55)*34,h=14+R(i,k+30)*30,o=y;y=Math.max(50,Math.min(170,y+d));const up=y<o,c=up?'#ff2b3a':'#fff';s+=`<line x1="${x}" x2="${x}" y1="${Math.min(o,y)-h/2}" y2="${Math.max(o,y)+h/2}" stroke="${c}" stroke-width="2"/><rect x="${x-7}" y="${Math.min(o,y)}" width="14" height="${Math.abs(y-o)+6}" fill="${c}"/>`}return s},
+shield:()=>`<path d="M200 28 L270 52 V112 C270 152 238 178 200 194 C162 178 130 152 130 112 V52 Z" fill="#ff2b3a22" stroke="#ff2b3a" stroke-width="4"/><path d="M168 112 L192 138 L236 84" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`,
+gauge:()=>`<path d="M90 170 A110 110 0 0 1 310 170" fill="none" stroke="#3a0d12" stroke-width="22"/><path d="M90 170 A110 110 0 0 1 250 72" fill="none" stroke="#ff2b3a" stroke-width="22"/><line x1="200" y1="170" x2="262" y2="96" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="200" cy="170" r="12" fill="#fff"/>`,
+wave:i=>{let p='M20 110';for(let k=1;k<=18;k++)p+=` L${20+k*20} ${110+Math.sin(k*.9+i)*45}`;return `<path d="${p}" fill="none" stroke="#fff" stroke-width="3"/><path d="M20 190 L120 170 L220 176 L320 150 L380 140" fill="none" stroke="#ff2b3a" stroke-width="3" stroke-dasharray="6 6"/><circle cx="120" cy="170" r="6" fill="#ff2b3a"/><circle cx="320" cy="150" r="6" fill="#ff2b3a"/>`},
+fib:()=>{let s='';[['0',40],['0.382',85],['0.5',110],['0.618',135],['1',180]].forEach(([l,y],k)=>s+=`<line x1="60" x2="370" y1="${y}" y2="${y}" stroke="${k==3?'#ff2b3a':'#fff4'}" stroke-width="${k==3?3:1.5}" stroke-dasharray="${k==3?0:5}"/><text x="20" y="${y+4}" fill="${k==3?'#ff2b3a':'#fff'}" font-size="12" font-weight="700">${l}</text>`);return s+`<path d="M70 178 L150 60 L210 120 L290 52 L360 135" fill="none" stroke="#fff" stroke-width="3"/>`},
+coin:()=>`<circle cx="200" cy="110" r="68" fill="#ff2b3a22" stroke="#ff2b3a" stroke-width="5"/><circle cx="200" cy="110" r="50" fill="none" stroke="#fff4" stroke-width="2"/><text x="200" y="132" text-anchor="middle" fill="#fff" font-size="68" font-weight="900">$</text>`,
+swap:()=>`<circle cx="95" cy="110" r="46" fill="#ff2b3a22" stroke="#ff2b3a" stroke-width="4"/><circle cx="305" cy="110" r="46" fill="#fff1" stroke="#fff" stroke-width="4"/><text x="95" y="120" text-anchor="middle" fill="#ff2b3a" font-size="30" font-weight="900">$</text><text x="305" y="120" text-anchor="middle" fill="#fff" font-size="30" font-weight="900">$</text><path d="M150 96 H250 M232 78 L252 96 L232 114" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M250 130 H150 M168 112 L148 130 L168 148" fill="none" stroke="#ff2b3a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`,
+compass:()=>`<circle cx="200" cy="110" r="78" fill="none" stroke="#fff5" stroke-width="3"/><circle cx="200" cy="110" r="64" fill="#ff2b3a11" stroke="#ff2b3a" stroke-width="3"/><path d="M200 50 L218 110 L200 170 L182 110 Z" fill="#ff2b3a"/><path d="M200 50 L218 110 L182 110 Z" fill="#fff"/><circle cx="200" cy="110" r="7" fill="#000" stroke="#fff" stroke-width="2"/>`,
+play:()=>`<rect x="92" y="38" width="216" height="140" rx="16" fill="#ff2b3a18" stroke="#ff2b3a" stroke-width="4"/><path d="M180 80 L238 108 L180 136 Z" fill="#fff"/><path d="M108 190 H292" stroke="#fff4" stroke-width="4"/><path d="M108 190 H190" stroke="#ff2b3a" stroke-width="4"/>`,
+person:()=>`<circle cx="200" cy="82" r="36" fill="#fff"/><path d="M122 190 C122 140 160 126 200 126 C240 126 278 140 278 190 Z" fill="#ff2b3a"/><path d="M30 40 L60 40 M30 60 L50 60" stroke="#fff3" stroke-width="3"/>`,
+down:i=>`<path d="M30 50 L110 80 L170 70 L240 130 L300 150 L370 192" fill="none" stroke="#fff" stroke-width="4"/><path d="M30 50 L110 80 L170 70 L240 130 L300 150 L370 192" fill="none" stroke="#ff2b3a" stroke-width="12" opacity=".25"/><circle cx="170" cy="70" r="7" fill="#fff"/><circle cx="240" cy="130" r="7" fill="#ff2b3a"/><circle cx="300" cy="150" r="7" fill="#ff2b3a"/><circle cx="370" cy="192" r="10" fill="none" stroke="#ff2b3a" stroke-width="3"/>`,
+bars:i=>{let s='';for(let k=0;k<12;k++){const h=24+Math.abs(Math.sin(k*.7+i))*100,poc=k==6;s+=`<rect x="${40+k*28}" y="${190-h}" width="20" height="${h}" fill="${poc?'#ff2b3a':'#fff'}" opacity="${poc?1:.55}"/>`}return s+`<path d="M30 80 C100 40 160 130 220 70 S330 60 380 90" fill="none" stroke="#ff2b3a" stroke-width="3"/>`},
+calc:()=>`<rect x="130" y="30" width="140" height="160" rx="14" fill="#ff2b3a14" stroke="#ff2b3a" stroke-width="4"/><rect x="146" y="46" width="108" height="36" rx="6" fill="#fff"/><text x="244" y="73" text-anchor="end" font-size="24" font-weight="900" fill="#000">1%</text>${[0,1,2].map(r=>[0,1,2].map(c=>`<rect x="${146+c*38}" y="${96+r*30}" width="32" height="22" rx="5" fill="${r==2&&c==2?'#ff2b3a':'#fff3'}"/>`).join('')).join('')}`,
+ques:()=>`<circle cx="200" cy="110" r="72" fill="#ff2b3a18" stroke="#ff2b3a" stroke-width="4"/><text x="200" y="146" text-anchor="middle" font-size="100" font-weight="900" fill="#fff">?</text><circle cx="86" cy="60" r="10" fill="#fff3"/><circle cx="318" cy="168" r="14" fill="#ff2b3a55"/>`
+};
+const art=(k,i,n)=>`<svg class="art" viewBox="0 0 400 220" aria-hidden="true"><defs><radialGradient id="r${i}" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#5a0a12"/><stop offset="1" stop-color="#050102"/></radialGradient></defs><rect width="400" height="220" fill="url(#r${i})"/><g stroke="#ff2b3a18">${[44,88,132,176].map(y=>`<line x1="0" x2="400" y1="${y}" y2="${y}"/>`).join('')}</g><text x="388" y="212" text-anchor="end" font-size="84" font-weight="900" fill="#ff2b3a" opacity=".16">${n}</text>${M[k](i)}</svg>`;
+const D=[
+['calc','Riesgo','Por qué perdés más de lo que deberías (y cómo frenarlo)','Entendé por qué cuidar tus pérdidas importa más que acertar entradas, con ejemplos claros de porcentajes y recuperación de capital.','PlGvDhWXP6g'],
+['gauge','Indicador ADX','Dejá de entrar en mercados que no tienen fuerza','Aprendé a leer la fuerza de la tendencia con el ADX para evitar laterales y rupturas falsas, sin usarlo como señal ciega.','1G8nbODnwJU'],
+['wave','Indicador RSI','"Sobrecompra" no significa vender: el error que te sale caro','Descubrí cómo usar el RSI con divergencias y estructura de precio para dejar de anticiparte a movimientos que todavía no llegaron.','7qXy8DbPP9Q'],
+['fib','Fibonacci','Fibonacci sin adivinar: cuándo una zona realmente vale','Trazá retrocesos y combinalos con soportes, resistencias y divergencias, para no entrar solo porque el precio tocó un nivel.','0jOWsIj-pMk'],
+['coin','Futuros','El costo oculto que se come tus posiciones cada día','Entendé el funding rate y cuánto te cuesta sostener futuros varios días, con ejemplos reales en Binance y Excel.','NSa4zD0G794'],
+['coin','Primeros pasos','Tu primer USDT con pesos argentinos, paso a paso','Dos formas de comprar USDT en Binance (P2P o depósito + spot), cómo elegir contraparte y qué precauciones tomar.','b_kHZo4iNao'],
+['swap','Primeros pasos','Mové tu plata a BingX sin cometer el error que no se revierte','Transferencia real entre exchanges: elegir la red correcta, copiar la dirección y los controles de seguridad antes de enviar.','b0jlm1YBFgs'],
+['compass','Estrategia','Tenés la estrategia, pero no sabés cuándo NO entrar','Una estrategia simple con EMA 9/20 y RSI, y por qué cumplir las reglas no alcanza: el criterio decide si la operación es válida.','2CwKr_7YH_Y'],
+['shield','Riesgo','Calculá cada operación antes de entrar, no después de perder','Armá tu operación desde el capital, el % de riesgo, el stop loss y el tamaño de posición. Margen, apalancamiento y exposición, sin confusión.','-q4MBKpVwWY'],
+['person','Historia','Del laboratorio al trading: la pérdida que lo cambió todo','Los errores, una pérdida importante y cómo nació el criterio propio detrás de RT500. Conocé quién está del otro lado.','LSD8DfQ5b5Y'],
+['down','Psicotrading','Promediar pérdidas: la trampa que liquida cuentas','Por qué sostener una posición perdedora y meter más capital te acerca a la liquidación, y cómo reconocer cuándo tu análisis ya no sirve.','8juTSwgUvso'],
+['play','Clase privada','Entrá a una clase GOLD real, sin editar','Un fragmento auténtico de una sesión en vivo: noticias, liquidez, estructura y preguntas reales de alumnos sobre Bitcoin.','iW6bqkBcggg'],
+['coin','Mitos','¿PEPE a USD 1.000? Hacé la cuenta antes de ilusionarte','Precio, suministro y capitalización explicados con números, para que dejes de creer promesas imposibles y evalúes con lógica.','mXvb6xwx4ls'],
+['candles','Caso práctico','7 días operando spot ETH y SOL: así fue de verdad','Un experimento documentado con soportes, resistencias, figuras y RSI. Es un caso puntual, no una promesa de resultados.','3IcUlFzsNpU'],
+['ques','Comunidad','50 preguntas sin filtro sobre errores, miedos y trading real','Respuestas sobre cómo empezó, backtesting, apalancamiento y la vida detrás del gráfico. Sin guión.','WiJExSCTK9c'],
+['shield','Método RT500','No es otro curso más: qué hace distinto a RT500','Formación progresiva, gestión del riesgo, correcciones, psicotrading y comunidad. Mirá por qué no es solo "aprender estrategias".','u3aDpv_t9Gw'],
+['compass','Método RT500','La filosofía RT500: ¿es para vos?','Los tres pilares del programa, la historia de su origen y el tipo de alumno al que está pensado.','auvWv4PG7xg'],
+['play','Clase privada','Futuros desde cero: no operes sin entender esto','LONG, SHORT, margen, apalancamiento, stop loss, take profit y liquidación, con demostración en Binance y preguntas reales.','QsGC4zjScKU'],
+['candles','Clase privada','Aprendé a leer el gráfico y dejá de operar a ciegas','Velas, temporalidades, tendencias, soportes y resistencias explicados sobre gráficos reales.','644PGw-hqBI'],
+['candles','Clase privada','Mirá una operación real abrirse y cerrarse en vivo','Demostración sobre Solana con EMA 9/20 en un mercado volátil. Ejemplo didáctico para ver cómo se ejecuta.','bIKt7Uj-LwU'],
+['bars','Clase privada','Clase avanzada: MACD, liquidaciones y perfil de volumen','Divergencias del MACD, Coinglass, sentimiento y POC aplicados a Bitcoin, siempre conectados al contexto y al riesgo.','iizspq0C5mM']
+];
+document.getElementById('g').innerHTML=D.map((d,i)=>{const n=String(i+1).padStart(2,'0');return `<a class="card" href="https://www.youtube.com/watch?v=${d[4]}" target="_blank" rel="noopener">${art(d[0],i,n)}<div class="body"><div class="tag">${n} · ${d[1]}</div><h2>${d[2]}</h2><p>${d[3]}</p><div class="go">Abrir recurso →</div></div></a>`}).join('');
+</script>
+</body>
+</html>
